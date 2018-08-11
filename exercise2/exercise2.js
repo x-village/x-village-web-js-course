@@ -1,3 +1,8 @@
+// 偵測 keydown 事件 -> playSound
+window.addEventListener('keydown', playSound);
+addCallbackToTransitionendEventForEveryKeys();
+
+
 function removeTransition(event) {
   if (event.propertyName !== 'transform') {
     return;
