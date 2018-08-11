@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>X-Village</title>
+    <style>
+      html, body {
+        height: 100%;
+        width: 100%;
+        background-color: #eee;
+      }
+      h1 {
+        margin: 0px 0px 15px 20px;
+        font-family: "微軟正黑體", "Microsoft JhengHei", sans-serif;
+        font-size: 36px;
+      }
+      #wrapper {
+        margin: 23px;
+      }
+      .bar {
+        fill: steelblue;
+      }
+
+      .label {
+        fill: black;
+        font: 10px sans-serif;
+      }
+
+      .y path, .y stroke, .y line {
+        display: none;
+      }
+
+      .x path, .x stroke {
+        display: none;
+      }
+
+      .axis .domain {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+  <h1>台灣不動產交易資料 107年6月21 ～ 107年6月30日</h1>
+  <div id="wrapper">
+    <svg width="960" height="500"></svg>
+    <button id="avg-btn">平均數</button>
+    <button id="median-btn">中位數</button>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
+  <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+  <script src="./exercise1.js"></script>
+  <script src="./index.js"></script>
+  </body>
+</html>
