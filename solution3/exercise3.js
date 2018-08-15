@@ -5,7 +5,9 @@ loadData('./data.json');
 */
 function loadData(path) {
   // Write your code here...
-  $.getJSON(path, appendImgsFromData);
+  $.getJSON('./data.json', function(data) {
+    appendImgsFromData(data);
+  });
 }
 
 /*
@@ -14,12 +16,8 @@ function loadData(path) {
 */
 function appendImgsFromData(data) {
   // Write your code here...
-  data.forEach(element => {
+  for (let item of data) {
     $('.container')
-      .append(
-        $('<img>')
-          .attr('src', element.url)
-          .addClass('img')
-      );
-  });
+      .append('<img class="img" src="' + item.url + '" />');
+  };
 }

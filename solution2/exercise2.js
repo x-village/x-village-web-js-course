@@ -1,7 +1,8 @@
 // 偵測 keydown 事件 -> playSound
 window.addEventListener('keydown', playSound);
 addCallbackToTransitionendEventForEveryKeys();
-        
+
+
 function removeTransition(event) {
   if (event.propertyName !== 'transform') {
     return;
@@ -10,14 +11,16 @@ function removeTransition(event) {
 }
 
 /* 
-  讓所有 class 為 "key" 的元素，監聽 "transitionend" event，並設定 callback
+  讓所有 class 為 "key" 的元素，監聽 "transitionend" event，並設定 callback 為 removeTransition
 */
 function addCallbackToTransitionendEventForEveryKeys() {
-  const keys = Array.from(document.querySelectorAll('.key'));
-  keys.forEach(function(key) {
+  // Start here to write your code...
+  const keys = document.querySelectorAll('.key');
+  for (let key of keys) {
     key.addEventListener('transitionend', removeTransition);
-  });
+  };
 }
+
 
 /*
   1. 透過 event.keyCode，取得對應 div, audio html 元素
@@ -30,8 +33,9 @@ function addCallbackToTransitionendEventForEveryKeys() {
   - https://www.w3schools.com/jsref/dom_obj_audio.asp
 */
 function playSound(event) {
-  const audio = document.querySelector(`.audio-${event.keyCode}`);
-  const key = document.getElementById(`key-${event.keyCode}`);
+  // Start here to write your code...
+  const audio = document.querySelector('.audio-'+event.keyCode);
+  const key = document.getElementById('key-'+event.keyCode);
   
   if (!audio || !key) {
     return;

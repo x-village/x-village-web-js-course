@@ -1,33 +1,22 @@
 const PYEONG_BY_SQUARE_METER = 3.3058;
 
 function getAverageLandPriceByArea(data) {
-  const areaPriceListObj = reduceByArea(data);
-  return Object.keys(areaPriceListObj).map(function(area) {
-    return {
-      area: area,
-      price: mean(areaPriceListObj[area]) * PYEONG_BY_SQUARE_METER,
-    };
-  });
+  return mapAreaPriceListObjectItems(reduceByArea(data), mean)
 }
 
 function getMedianLandPriceByArea(data) {
-  const areaPriceListObj = reduceByArea(data);
-  return Object.keys(areaPriceListObj).map(function(area) {
-    return {
-      area: area,
-      price: median(areaPriceListObj[area]) * PYEONG_BY_SQUARE_METER,
-    };
-  });
+  return mapAreaPriceListObjectItems(reduceByArea(data), median)
 }
 
 function reduceByArea(data) {
-  return data.reduce(function(prev, current) {
-    if (!prev.hasOwnProperty(current.area)) {
-      prev[current.area] = [];
+  const areaPriceListObj = {};
+  for (let item of data) {
+    if(!areaPriceListObj.hasOwnProperty(item.area)) {
+      areaPriceListObj[item.area] = [];
     }
-    prev[current.area].push(current.price);
-    return prev;
-  }, {});
+    areaPriceListObj[item.area].push(item.price);
+  }
+  return areaPriceListObj;
 }
 
 function mean(values) {
@@ -43,4 +32,15 @@ function median(values) {
   } else {
       return (values[half-1] + values[half]) / 2.0;
   }
+}
+
+function mapAreaPriceListObjectItems(obj, fn) {
+  const results = [];
+  for (let key of Object.keys(obj)) {
+    results.push({
+      area: key,
+      price: fn(obj[key]) * PYEONG_BY_SQUARE_METER,
+    })
+  }
+  return results;
 }
