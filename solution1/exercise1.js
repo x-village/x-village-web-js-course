@@ -1,23 +1,11 @@
 const PYEONG_BY_SQUARE_METER = 3.3058;
 
 function getAverageLandPriceByArea(data) {
-  const areaPriceListObj = reduceByArea(data);
-  return Object.keys(areaPriceListObj).map(function(area) {
-    return {
-      area: area,
-      price: mean(areaPriceListObj[area]) * PYEONG_BY_SQUARE_METER,
-    };
-  });
+  return mapAreaPriceListObj(reduceByArea(data), mean);
 }
 
 function getMedianLandPriceByArea(data) {
-  const areaPriceListObj = reduceByArea(data);
-  return Object.keys(areaPriceListObj).map(function(area) {
-    return {
-      area: area,
-      price: median(areaPriceListObj[area]) * PYEONG_BY_SQUARE_METER,
-    };
-  });
+  return mapAreaPriceListObj(reduceByArea(data), median);
 }
 
 function reduceByArea(data) {
@@ -28,6 +16,15 @@ function reduceByArea(data) {
     prev[current.area].push(current.price);
     return prev;
   }, {});
+}
+
+function mapAreaPriceListObj(areaPriceListObj, fn) {
+  return Object.keys(areaPriceListObj).map(function(area) {
+    return {
+      area: area,
+      price: fn(areaPriceListObj[area]) * PYEONG_BY_SQUARE_METER,
+    };
+  });
 }
 
 function mean(values) {
